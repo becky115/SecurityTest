@@ -17,7 +17,7 @@
  
 			<form-login login-page="/login.do"
 				login-processing-url="/login_check.do"
-				default-target-url="/"
+				default-target-url="/main.do"
 				always-use-default-target="true"
 				username-parameter="userId"
 				password-parameter="userPass"
