@@ -1,29 +1,40 @@
-package com.eunji;
+package com.eunji.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.eunji.service.LoginLogoutService;
 
 @Controller
 public class LoginLogoutController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginLogoutController.class);
 	
+	@Autowired
+	private LoginLogoutService loginLogoutService;
+	
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
 	public void home(){
 		logger.debug("login.do home");
 	}
-//	@RequestMapping(value="/login_check.do", method=RequestMethod.POST)
-//	public void loginCheck(){
-//		logger.debug("loginCheck");
-//	}
+
+	
+	@RequestMapping(value="/login_check.do", method=RequestMethod.POST)
+	public void loginCheck(@RequestParam(name="userId") String userId, @RequestParam(name="userPass") String userPass){
+		logger.debug("loginCheck");
+		
+		boolean loginFlag = loginLogoutService.loginCheck(userId, userPass);
+	}
 	
 	
 	@RequestMapping(value="/log_out.do")

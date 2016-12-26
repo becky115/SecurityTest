@@ -17,8 +17,8 @@
 		
 
 	<context:component-scan base-package="com.eunji" />
-
 	<context:annotation-config />
+	
 	<mvc:annotation-driven/>
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
@@ -28,7 +28,12 @@
 	<mvc:view-controller path="/" view-name="index" />
 
 	
-
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://172.16.100.102:3306/EunjiESM"/>
+		<property name="username" value="root"/>
+		<property name="password" value="conndb!@34"/>
+	</bean>
 	
 	<!-- 핸들러 인터셉터 설정
 	<mvc:interceptors>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eunji.mapper.UserMapper">
+	<select id="detailUserInfo" resultType="java.util.HashMap">
+		SELECT	A.user_id,
+				A.user_nm,
+				A.passwd,
+				A.tel_no,
+				A.mobile_no,
+				A.mail_addr,
+				A.group_cd,
+				A.auth_ip,
+				A.description,
+				A.last_dt,
+				A.last_ip,
+				A.reg_dt,
+				A.pw_update_dt,
+				A.st_valid_dt,
+				A.ed_valid_dt,
+				COALESCE(A.lock_flag, 'N') as lock_flag,
+				A.group_seq,
+				B.group_code as role_id,
+				A.device_list
+		FROM COM_USER A
+		LEFT OUTER JOIN USER_GROUP B ON A.group_seq = B.group_seq
+		WHERE A.user_id = #{userId}
+	</select>
+	
+	<update id="updateLastDt" parameterType="map">
+		UPDATE COM_USER SET
+			last_dt = DATE_FORMAT(NOW(),'%Y%m%d%H%i%S'),
+			last_ip = #{lastIp}
+		WHERE
+			user_id = #{userId}
+	</update>
+</mapper>
