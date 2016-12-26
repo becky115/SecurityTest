@@ -26,6 +26,7 @@ public class LoginLogoutController {
 //	}
 	
 	
+	/*
 	@RequestMapping(value="/log_out.do")
 	public String logout(HttpServletRequest request, HttpServletResponse response){
 		logger.debug("log_out");
@@ -36,8 +37,7 @@ public class LoginLogoutController {
 			logger.debug("name: "+ auth.getName()+" password: "+  auth.getPrincipal());
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
-		return "redirect:/login?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
+		return "redirect:/login.do";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
 	}
-	
-
+	*/
 }
